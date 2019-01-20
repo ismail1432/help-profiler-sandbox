@@ -1,0 +1,74 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+{% block menu %}
+    <span class="label">
+        <span class="icon"><img src="https://img.icons8.com/material-outlined/50/000000/help.png" alt="help"></span>
+        <strong>Help</strong>
+    </span>
+{% endblock %}
+{% block panel %}
+    <h2>Help</h2>
+    <table>
+        <tr>
+            <td>
+                <a href="{{ constant("App\\DataCollector\\HelpExceptionCollector::SYMFONY") }}" target="_blank">Symfony
+                    documentation</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="{{ constant("App\\DataCollector\\HelpExceptionCollector::STACKOVERFLOW") }}" target="_blank">Stackoverflow</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="{{ constant("App\\DataCollector\\HelpExceptionCollector::SLACK") }}" target="_blank">Slack
+                    Support channel</a>
+            </td>
+        </tr>
+    </table>
+
+    {% if collector.hasException %}
+        <h2>Search</h2>
+        <table>
+
+            <tr>
+                <td><a href="{{ collector.googleSearchQuery }}" target="_blank">Search on Google</a></td>
+            </tr>
+            <tr>
+                <td><a href="{{ collector.stackOverflowQuery }}" target="_blank">Search on Stackoverflow</a></td>
+            </tr>
+        </table>
+    {% endif %}
+{% endblock %}
+{% block toolbar %}
+    {% set icon %}
+        <span class="icon"><img src=https://img.icons8.com/material-outlined/50/000000/help.png"alt="help"></span>
+        <span class="sf-toolbar-value">Help</span>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b><a href="{{ constant("App\\DataCollector\\HelpExceptionCollector::SYMFONY") }}" target="_blank">Documentation</a>
+            </b>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b><a href="{{ constant("App\\DataCollector\\HelpExceptionCollector::STACKOVERFLOW") }}" target="_blank">Stackoverflow</a>
+            </b>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b><a href="{{ constant("App\\DataCollector\\HelpExceptionCollector::SLACK") }}" target="_blank">Slack
+                    Support channel</a></b>
+        </div>
+
+        {% if collector.hasException %}
+            <div class="sf-toolbar-info-piece">
+                <b><a href="{{ collector.googleSearchQuery }}" target="_blank">Search on Google</a></b>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b><a href="{{ collector.stackOverflowQuery }}" target="_blank">Search on Stackoverflow</a></b>
+            </div>
+        {% endif %}
+
+    {% endset %}
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false }) }}
+{% endblock %}
